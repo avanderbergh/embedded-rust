@@ -1,10 +1,22 @@
 FROM mcr.microsoft.com/devcontainers/rust:1-1-bullseye
 
 ENV DEBIAN_FRONTEND=noninteractive
+
 RUN sudo apt-get update \
     && sudo apt-get -y install --no-install-recommends \
     gdb-multiarch \
-    minicom
+    minicom \
+    libudev-dev \
+    pkg-config \
+    cmake \
+    udev
+
+# Copy udev rules into the container
+COPY 99-custom.rules /etc/udev/rules.d/
+
+# Install probe-rs-tools using the official install script
+RUN curl --proto '=https' --tlsv1.2 -LsSf \
+    https://github.com/probe-rs/probe-rs/releases/latest/download/probe-rs-tools-installer.sh | sh
 
 RUN usermod -a -G dialout vscode
 RUN usermod -a -G plugdev vscode
