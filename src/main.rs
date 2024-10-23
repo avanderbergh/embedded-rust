@@ -3,6 +3,7 @@
 
 extern crate cortex_m;
 
+use cortex_m::asm::nop;
 use panic_rtt_target as _;
 use rtt_target::{rprintln, rtt_init_print};
 
@@ -13,6 +14,9 @@ fn main() -> ! {
     rtt_init_print!();
     rprintln!("Setting Up");
     loop {
-        rprintln!("Hey?")
+        rprintln!("Hey?");
+        for _ in 0..100_000 {
+            nop();
+        }
     }
 }
