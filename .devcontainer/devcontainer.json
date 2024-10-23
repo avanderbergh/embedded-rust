@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/rust
+{
+  "name": "Rust",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "build": {
+    "dockerfile": "Containerfile",
+    "context": "."
+  },
+  "features": {
+    "ghcr.io/meaningful-ooo/devcontainer-features/fish:1": {},
+    "ghcr.io/devcontainers-extra/features/node-asdf:0": {},
+    "ghcr.io/devcontainers-extra/features/pnpm:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "fill-labs.dependi",
+        "tamasfe.even-better-toml",
+        "usernamehw.errorlens",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "mounts": ["source=/dev,target=/dev,type=bind,consistency=consistent"],
+  "runArgs": ["--privileged"],
+  "postCreateCommand": "rustup default beta"
+}

@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/devcontainers/rust:1-1-bullseye
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN sudo apt-get update \
+    && sudo apt-get -y install --no-install-recommends \
+    gdb-multiarch \
+    minicom
+
+RUN usermod -a -G dialout vscode
+RUN usermod -a -G plugdev vscode
