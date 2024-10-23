@@ -28,6 +28,6 @@
   },
   "mounts": ["source=/dev,target=/dev,type=bind,consistency=consistent"],
   "runArgs": ["--privileged"],
-  "postCreateCommand": "rustup default beta && rustup component add llvm-tools",
+  "postCreateCommand": "rustup default beta && rustup component add llvm-tools rustfmt && rustup target add thumbv6m-none-eabi && cargo install cargo-binutils",
   "postAttachCommand": "sudo service udev restart"
 }
